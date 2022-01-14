@@ -11,3 +11,11 @@ This library applies the shimmering effect to the views in an easy way.
 2. [SDWebImage](https://github.com/SDWebImage/SDWebImageSwiftUI)
 
 It is a very popular library and this library provides an async image downloader with cache support.
+
+### Dependency Manager
+
+[Swift Package Manager](https://github.com/apple/swift-package-manager)
+
+### Architecture Pattern
+
+I chose the MVVM (Model View ViewModel) Architecture Pattern because this design pattern helps in the maintenance of the software and provides more clean and structured code.
