@@ -28,6 +28,7 @@
 		47C1DB082790D56E00EB0431 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DB072790D56E00EB0431 /* APIService.swift */; };
 		47C1DB0B2790D74400EB0431 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DB0A2790D74400EB0431 /* HomeViewModel.swift */; };
 		47C1DB0F2790F09400EB0431 /* Starting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DB0E2790F09400EB0431 /* Starting.swift */; };
+		47FC4C242792314B00657B93 /* UIView+Tap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FC4C232792314B00657B93 /* UIView+Tap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		47C1DB072790D56E00EB0431 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		47C1DB0A2790D74400EB0431 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		47C1DB0E2790F09400EB0431 /* Starting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Starting.swift; sourceTree = "<group>"; };
+		47FC4C232792314B00657B93 /* UIView+Tap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Tap.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		471EB1AC278EAFE100AD1C79 /* Leap */ = {
 			isa = PBXGroup;
 			children = (
+				47FC4C222792313600657B93 /* Extensions */,
 				474E8C272791293A000EFCA1 /* Views */,
 				47C1DB092790D72000EB0431 /* ViewModels */,
 				47C1DB062790D55900EB0431 /* Network */,
@@ -215,6 +218,14 @@
 				47C1DB0A2790D74400EB0431 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		47FC4C222792313600657B93 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				47FC4C232792314B00657B93 /* UIView+Tap.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +379,7 @@
 				47C1DB022790C33D00EB0431 /* Upcomings.swift in Sources */,
 				471EB1B0278EAFE100AD1C79 /* SceneDelegate.swift in Sources */,
 				474E8C2927912951000EFCA1 /* ErrorView.swift in Sources */,
+				47FC4C242792314B00657B93 /* UIView+Tap.swift in Sources */,
 				47C1DB002790C33D00EB0431 /* Explore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

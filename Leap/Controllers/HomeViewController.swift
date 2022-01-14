@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
         if #available(iOS 15.0, *) {
             homeTableView?.sectionHeaderTopPadding = 0
         }
+        viewModel.delegate = self
         addErrorView()
         errorView.view.isHidden = true
         callFuncToGetHomeData()
@@ -122,4 +123,13 @@ extension HomeViewController: UITableViewDelegate {
         cell.setTemplateWithSubviews(isLoading, animate: true, viewBackgroundColor: .systemBackground)
     }
     
+}
+
+extension HomeViewController: CellActionDelegate {
+    
+    func handleTap(_ content: String) {
+        let alert = UIAlertController(title: "Alert", message: content, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

@@ -15,6 +15,7 @@ class HorizontalCardViewCell: UITableViewCell, UICollectionViewDataSource, UICol
     private var isLoading = true
     private var isIconHidden = true
     private var items: [Upcomings]?
+    var delegate: CellActionDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -84,6 +85,11 @@ class HorizontalCardViewCell: UITableViewCell, UICollectionViewDataSource, UICol
         if let data = items {
             cell.cardTitle.text = data[indexPath.row].title
             cell.cardImage.sd_setImage(with: URL(string: data[indexPath.row].image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+            cell.addTapGesture {
+                if let delegate = self.delegate {
+                    delegate.handleTap(data[indexPath.row].title!)
+                }
+            }
         }
         return cell
     }

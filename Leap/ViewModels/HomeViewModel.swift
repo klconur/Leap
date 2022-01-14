@@ -21,9 +21,14 @@ protocol HomeViewModelItem {
     var rowCount: Int { get }
 }
 
+protocol CellActionDelegate {
+    func handleTap(_ content: String)
+}
+
 class HomeViewModel : NSObject {
     
     var items = [HomeViewModelItem]()
+    var delegate: CellActionDelegate?
     
     override init() {
         super.init()
@@ -60,6 +65,9 @@ extension HomeViewModel: UITableViewDataSource {
                     cell.cardTitle.text = data.title
                     cell.subtitleLabel.text = data.subtitle
                     cell.cardImage.sd_setImage(with: URL(string: data.image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+                    cell.addTapGesture {
+                        self.handleTap(item.content()!)
+                    }
                 }
                 return cell
             }
@@ -68,6 +76,7 @@ extension HomeViewModel: UITableViewDataSource {
                 cell.setIconHidden(false)
                 if let item = items[indexPath.section] as? HomeViewModelYourUpcomingItem, let data = item.items {
                     cell.setItems(data)
+                    cell.delegate = self
                 }
                 return cell
             }
@@ -76,6 +85,7 @@ extension HomeViewModel: UITableViewDataSource {
                 cell.setIconHidden(true)
                 if let item = items[indexPath.section] as? HomeViewModelUpcomingItem, let data = item.items {
                     cell.setItems(data)
+                    cell.delegate = self
                 }
                 return cell
             }
@@ -86,6 +96,9 @@ extension HomeViewModel: UITableViewDataSource {
                     cell.cardTitle.text = data[indexPath.row].title
                     cell.subtitleLabel.text = data[indexPath.row].subtitle
                     cell.cardImage.sd_setImage(with: URL(string: data[indexPath.row].image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+                    cell.addTapGesture {
+                        self.handleTap(item.content(indexPath.row)!)
+                    }
                 }
                 return cell
             }
@@ -93,6 +106,15 @@ extension HomeViewModel: UITableViewDataSource {
         return UITableViewCell()
     }
 
+}
+
+extension HomeViewModel: CellActionDelegate {
+    
+    func handleTap(_ content: String) {
+        if let delegate = delegate {
+            delegate.handleTap(content)
+        }
+    }
 }
 
 class HomeViewModelStartingItem: HomeViewModelItem {
@@ -108,6 +130,13 @@ class HomeViewModelStartingItem: HomeViewModelItem {
     
     var rowCount: Int {
         return 1
+    }
+    
+    func content() -> String? {
+        if let item = item {
+            return item.title
+        }
+        return nil
     }
 }
 
@@ -125,6 +154,13 @@ class HomeViewModelYourUpcomingItem: HomeViewModelItem {
     var rowCount: Int {
         return 1
     }
+    
+    func content(_ row: Int) -> String? {
+        if let items = items {
+            return items[row].title
+        }
+        return nil
+    }
 }
 
 class HomeViewModelUpcomingItem: HomeViewModelItem {
@@ -140,6 +176,13 @@ class HomeViewModelUpcomingItem: HomeViewModelItem {
     
     var rowCount: Int {
         return 1
+    }
+    
+    func content(_ row: Int) -> String? {
+        if let items = items {
+            return items[row].title
+        }
+        return nil
     }
 }
 
@@ -159,6 +202,13 @@ class HomeViewModelExploreItem: HomeViewModelItem {
             return items.count
         }
         return 3
+    }
+    
+    func content(_ row: Int) -> String? {
+        if let items = items {
+            return items[row].title
+        }
+        return nil
     }
 }
 
