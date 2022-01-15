@@ -48,5 +48,6 @@ Other tabs have not been implemented yet. Activity, Calendar, Account.
 
 ### Improvements
 
-[bindTableViewData](https://github.com/klconur/Leap/blob/main/Leap/Controllers/HomeViewController.swift#L52) function is not flexible enough. I need to implement it in a different way.
+1. [bindTableViewData](https://github.com/klconur/Leap/blob/main/Leap/Controllers/HomeViewController.swift#L52) function is not flexible enough. I need to implement it in a different way.
 
+2. Normally, I don't like to use hardcoded texts in a project but there are some hardcoded texts in this project.
