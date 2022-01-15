@@ -19,3 +19,7 @@ It is a very popular library and this library provides an async image downloader
 ### Architecture Pattern
 
 I chose the MVVM (Model View ViewModel) Architecture Pattern because this design pattern helps in the maintenance of the software and provides more clean and structured code.
+
+### Views
+
+![Views](https://media.giphy.com/media/4fqFpQeTBdGf0fXjbJ/giphy.gif)
