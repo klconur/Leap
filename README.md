@@ -23,3 +23,7 @@ I chose the MVVM (Model View ViewModel) Architecture Pattern because this design
 ### Views
 
 ![Views](https://media.giphy.com/media/4fqFpQeTBdGf0fXjbJ/giphy.gif)
+
+### API
+
+I created a dummy JSON file as a backend service. You can check it on [this link](https://okb.com.tr/data.json)
