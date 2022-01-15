@@ -22,8 +22,19 @@ I chose the MVVM (Model View ViewModel) Architecture Pattern because this design
 
 ### Views
 
+I developed views (and view cells) programmatically which provides more flexibility to me. There is one storyboard on the project, this contains TabBarController and ViewControllers.
+
 ![Views](https://media.giphy.com/media/4fqFpQeTBdGf0fXjbJ/giphy.gif)
 
 ### API
 
 I created a dummy JSON file as a backend service. You can check it on [this link](https://okb.com.tr/data.json)
+
+### Card Tap
+
+![Card Tap](https://i.ibb.co/y5V1Y8r/Simulator-Screen-Shot-i-Phone-11-Pro-2022-01-14-at-19-08-32.png)
+
+### Errors
+
+
+
