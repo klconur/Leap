@@ -38,5 +38,13 @@ Card tap is triggering only an alert with the title.
 
 ### Errors
 
+I don't categorize the errors yet, I am just showing the "no internet error" view when I am getting an error. I used SwiftUI for this screen.
 
+<img src="https://i.ibb.co/z6Xg0fz/Simulator-Screen-Shot-i-Phone-11-Pro-2022-01-14-at-21-52-48.png" width="200" />
+
+### Other Tabs
+
+Other tabs have not been implemented yet.
+
+### Improvements
 
