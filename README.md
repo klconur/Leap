@@ -44,7 +44,7 @@ I don't categorize the errors yet, I am just showing the "no internet error" vie
 
 ### Other Tabs
 
-Other tabs have not been implemented yet.
+Other tabs have not been implemented yet. Activity, Calendar, Account.
 
 ### Improvements
 
