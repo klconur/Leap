@@ -32,6 +32,8 @@ I created a dummy JSON file as a backend service. You can check it on [this link
 
 ### Card Tap
 
+Card tap is triggering only an alert with the title now.
+
 ![Card Tap](https://i.ibb.co/y5V1Y8r/Simulator-Screen-Shot-i-Phone-11-Pro-2022-01-14-at-19-08-32.png)
 
 ### Errors
