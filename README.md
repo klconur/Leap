@@ -26,7 +26,7 @@ I chose the MVVM (Model View ViewModel) Architecture Pattern because this design
 
 ### Function and Variable Naming conventions
 
-Camelcase: Words are delimited by capital letters, except the initial word.
+`Camelcase`: Words are delimited by capital letters, except the initial word.
 
 ### Views
 
