@@ -1,5 +1,9 @@
 # Leap
 
+<img src="https://i.ibb.co/hR0S711/Simulator-Screen-Shot-i-Phone-11-Pro-2022-01-16-at-15-43-46.png" width="200" /> <img src="https://i.ibb.co/Rz7St6P/Simulator-Screen-Shot-i-Phone-11-Pro-2022-01-16-at-15-42-46.png" width="200" />
+
+### Libraries
+
 Two 3rd party libraries have been used for the project.
 
 1. [UIView-Shimmer](https://github.com/omerfarukozturk/UIView-Shimmer)
@@ -45,6 +49,8 @@ I don't categorize the errors yet, I am just showing the "no internet error" vie
 ### Other Tabs
 
 Other tabs have not been implemented yet. Activity, Calendar, Account.
+
+<img src="https://i.ibb.co/0MxVN1n/Simulator-Screen-Shot-i-Phone-11-Pro-2022-01-16-at-15-43-32.png" width="200" />
 
 ### Improvements
 
