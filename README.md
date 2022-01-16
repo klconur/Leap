@@ -24,6 +24,10 @@ It is a very popular library and this library provides an async image downloader
 
 I chose the MVVM (Model View ViewModel) Architecture Pattern because this design pattern helps in the maintenance of the software and provides more clean and structured code.
 
+### Function and Class Naming conventions
+
+Camelcase: Words are delimited by capital letters, except the initial word.
+
 ### Views
 
 I developed views (and view cells) programmatically which provides more flexibility to me. There is one storyboard on the project, this contains TabBarController and ViewControllers.
