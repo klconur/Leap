@@ -58,8 +58,8 @@ Other tabs have not been implemented yet. Activity, Calendar, Account.
 
 ### Improvements
 
-1. [bindTableViewData](https://github.com/klconur/Leap/blob/main/Leap/Controllers/HomeViewController.swift#L52) function is not flexible enough. I need to implement it in a different way.
+- [ ] [bindTableViewData](https://github.com/klconur/Leap/blob/main/Leap/Controllers/HomeViewController.swift#L52) function is not flexible enough. I need to implement it in a different way.
 
-2. Normally, I don't like to use hardcoded texts in a project but there are some hardcoded texts in this project.
+- [ ] Normally, I don't like to use hardcoded texts in a project but there are some hardcoded texts in this project.
 
-3. (Sunday January 16 update) For ViewCell actions, I have added tapgesture recognizer to each view. This is not memory friendly, I would like to change it with didRowAt function.
+- [ ] (Sunday January 16 update) For ViewCell actions, I have added tapgesture recognizer to each view. This is not memory friendly, I would like to change it with didRowAt function.
