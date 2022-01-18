@@ -50,17 +50,8 @@ class HomeViewController: UIViewController {
     }
     
     private func bindTableViewData(_ homeData: Data) {
-        if let starting = viewModel.items.first(where: {$0.type == .starting}), let item = starting as? HomeViewModelStartingItem {
-            item.item = homeData.starting
-        }
-        if let yourUpcomings = viewModel.items.first(where: {$0.type == .yourUpcomings}), let item = yourUpcomings as? HomeViewModelYourUpcomingItem {
-            item.items = homeData.your_upcomings
-        }
-        if let upcomings = viewModel.items.first(where: {$0.type == .upcomings}), let item = upcomings as? HomeViewModelUpcomingItem {
-            item.items = homeData.upcomings
-        }
-        if let explore = viewModel.items.first(where: {$0.type == .explore}), let item = explore as? HomeViewModelExploreItem {
-            item.items = homeData.explore
+        viewModel.items.forEach { item in
+            item.bindData(data: homeData)
         }
         isLoading = false
         DispatchQueue.main.async {

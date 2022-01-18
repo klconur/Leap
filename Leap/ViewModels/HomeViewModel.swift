@@ -19,6 +19,7 @@ protocol HomeViewModelItem {
     var type: HomeViewModelItemType { get }
     var sectionTitle: String { get }
     var rowCount: Int { get }
+    func bindData(data: Data)
 }
 
 protocol CellActionDelegate {
@@ -138,6 +139,10 @@ class HomeViewModelStartingItem: HomeViewModelItem {
         }
         return nil
     }
+    
+    func bindData(data: Data) {
+        item = data.starting
+    }
 }
 
 class HomeViewModelYourUpcomingItem: HomeViewModelItem {
@@ -161,6 +166,10 @@ class HomeViewModelYourUpcomingItem: HomeViewModelItem {
         }
         return nil
     }
+    
+    func bindData(data: Data) {
+        items = data.your_upcomings
+    }
 }
 
 class HomeViewModelUpcomingItem: HomeViewModelItem {
@@ -183,6 +192,10 @@ class HomeViewModelUpcomingItem: HomeViewModelItem {
             return items[row].title
         }
         return nil
+    }
+    
+    func bindData(data: Data) {
+        items = data.upcomings
     }
 }
 
@@ -209,6 +222,10 @@ class HomeViewModelExploreItem: HomeViewModelItem {
             return items[row].title
         }
         return nil
+    }
+    
+    func bindData(data: Data) {
+        items = data.explore
     }
 }
 
