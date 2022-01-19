@@ -17,18 +17,17 @@
 		471EB1CF278EAFE700AD1C79 /* LeapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB1CE278EAFE700AD1C79 /* LeapUITests.swift */; };
 		471EB1D1278EAFE700AD1C79 /* LeapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471EB1D0278EAFE700AD1C79 /* LeapUITestsLaunchTests.swift */; };
 		474E8C2927912951000EFCA1 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474E8C2827912951000EFCA1 /* ErrorView.swift */; };
+		476ACA4A27976EED004B7681 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476ACA4927976EED004B7681 /* SectionHeader.swift */; };
 		476B9B7E278F6815009F60A4 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B9B7D278F6815009F60A4 /* CardViewCell.swift */; };
+		477812232797C9FB000ED47E /* SmallCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477812222797C9FB000ED47E /* SmallCardViewCell.swift */; };
 		47C1DAF2278FB66400EB0431 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 47C1DAF1278FB66400EB0431 /* SDWebImageSwiftUI */; };
-		47C1DAF4278FE3DE00EB0431 /* HorizontalCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DAF3278FE3DE00EB0431 /* HorizontalCardViewCell.swift */; };
 		47C1DAF72790A6B900EB0431 /* UIView-Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 47C1DAF62790A6B900EB0431 /* UIView-Shimmer */; };
-		47C1DAF92790B5C900EB0431 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DAF82790B5C900EB0431 /* CollectionViewCell.swift */; };
 		47C1DAFF2790C33D00EB0431 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DAFB2790C33D00EB0431 /* Data.swift */; };
 		47C1DB002790C33D00EB0431 /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DAFC2790C33D00EB0431 /* Explore.swift */; };
 		47C1DB022790C33D00EB0431 /* Upcomings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DAFE2790C33D00EB0431 /* Upcomings.swift */; };
 		47C1DB082790D56E00EB0431 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DB072790D56E00EB0431 /* APIService.swift */; };
 		47C1DB0B2790D74400EB0431 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DB0A2790D74400EB0431 /* HomeViewModel.swift */; };
 		47C1DB0F2790F09400EB0431 /* Starting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1DB0E2790F09400EB0431 /* Starting.swift */; };
-		47FC4C242792314B00657B93 /* UIView+Tap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FC4C232792314B00657B93 /* UIView+Tap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,16 +62,15 @@
 		471EB1CE278EAFE700AD1C79 /* LeapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeapUITests.swift; sourceTree = "<group>"; };
 		471EB1D0278EAFE700AD1C79 /* LeapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeapUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		474E8C2827912951000EFCA1 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		476ACA4927976EED004B7681 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		476B9B7D278F6815009F60A4 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
-		47C1DAF3278FE3DE00EB0431 /* HorizontalCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCardViewCell.swift; sourceTree = "<group>"; };
-		47C1DAF82790B5C900EB0431 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		477812222797C9FB000ED47E /* SmallCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCardViewCell.swift; sourceTree = "<group>"; };
 		47C1DAFB2790C33D00EB0431 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		47C1DAFC2790C33D00EB0431 /* Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
 		47C1DAFE2790C33D00EB0431 /* Upcomings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upcomings.swift; sourceTree = "<group>"; };
 		47C1DB072790D56E00EB0431 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		47C1DB0A2790D74400EB0431 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		47C1DB0E2790F09400EB0431 /* Starting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Starting.swift; sourceTree = "<group>"; };
-		47FC4C232792314B00657B93 /* UIView+Tap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Tap.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +123,6 @@
 		471EB1AC278EAFE100AD1C79 /* Leap */ = {
 			isa = PBXGroup;
 			children = (
-				47FC4C222792313600657B93 /* Extensions */,
 				474E8C272791293A000EFCA1 /* Views */,
 				47C1DB092790D72000EB0431 /* ViewModels */,
 				47C1DB062790D55900EB0431 /* Network */,
@@ -189,8 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				476B9B7D278F6815009F60A4 /* CardViewCell.swift */,
-				47C1DAF3278FE3DE00EB0431 /* HorizontalCardViewCell.swift */,
-				47C1DAF82790B5C900EB0431 /* CollectionViewCell.swift */,
+				477812222797C9FB000ED47E /* SmallCardViewCell.swift */,
+				476ACA4927976EED004B7681 /* SectionHeader.swift */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -218,14 +215,6 @@
 				47C1DB0A2790D74400EB0431 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		47FC4C222792313600657B93 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				47FC4C232792314B00657B93 /* UIView+Tap.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,8 +358,7 @@
 			files = (
 				471EB1B2278EAFE100AD1C79 /* HomeViewController.swift in Sources */,
 				47C1DB0F2790F09400EB0431 /* Starting.swift in Sources */,
-				47C1DAF4278FE3DE00EB0431 /* HorizontalCardViewCell.swift in Sources */,
-				47C1DAF92790B5C900EB0431 /* CollectionViewCell.swift in Sources */,
+				476ACA4A27976EED004B7681 /* SectionHeader.swift in Sources */,
 				47C1DB082790D56E00EB0431 /* APIService.swift in Sources */,
 				471EB1AE278EAFE100AD1C79 /* AppDelegate.swift in Sources */,
 				476B9B7E278F6815009F60A4 /* CardViewCell.swift in Sources */,
@@ -379,7 +367,7 @@
 				47C1DB022790C33D00EB0431 /* Upcomings.swift in Sources */,
 				471EB1B0278EAFE100AD1C79 /* SceneDelegate.swift in Sources */,
 				474E8C2927912951000EFCA1 /* ErrorView.swift in Sources */,
-				47FC4C242792314B00657B93 /* UIView+Tap.swift in Sources */,
+				477812232797C9FB000ED47E /* SmallCardViewCell.swift in Sources */,
 				47C1DB002790C33D00EB0431 /* Explore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

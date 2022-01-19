@@ -10,29 +10,29 @@ import SwiftUI
 
 class HomeViewController: UIViewController {
 
-    @IBOutlet weak var homeTableView: UITableView?
+    @IBOutlet weak var homeCollectionView: UICollectionView?
     fileprivate let viewModel = HomeViewModel()
     private var errorView: UIHostingController<ErrorView>!
     private var apiService : APIService!
     private var isLoading = true
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.apiService =  APIService()
-        homeTableView?.dataSource = viewModel
-        homeTableView?.estimatedSectionHeaderHeight = 30
-        homeTableView?.sectionHeaderHeight = UITableView.automaticDimension
-        homeTableView?.rowHeight = UITableView.automaticDimension
-        homeTableView?.estimatedRowHeight = UITableView.automaticDimension
-        homeTableView?.register(CardViewCell.self, forCellReuseIdentifier: CardViewCell.identifier)
-        homeTableView?.register(HorizontalCardViewCell.self, forCellReuseIdentifier: HorizontalCardViewCell.identifier)
-        if #available(iOS 15.0, *) {
-            homeTableView?.sectionHeaderTopPadding = 0
-        }
-        viewModel.delegate = self
+        homeCollectionView?.dataSource = viewModel
+        homeCollectionView?.collectionViewLayout = createLayout()
+        homeCollectionView?.register(CardViewCell.self, forCellWithReuseIdentifier: CardViewCell.cardIdentifier)
+        homeCollectionView?.register(SmallCardViewCell.self, forCellWithReuseIdentifier: SmallCardViewCell.smallCardIdentifier)
+        homeCollectionView?.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.identifier)
         addErrorView()
         errorView.view.isHidden = true
         callFuncToGetHomeData()
+    }
+    
+    private func createLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { sectionNumber, env -> NSCollectionLayoutSection? in
+            return self.viewModel.items[sectionNumber].getLayoutSection()
+        }
     }
     
     private func callFuncToGetHomeData() {
@@ -56,7 +56,7 @@ class HomeViewController: UIViewController {
         isLoading = false
         DispatchQueue.main.async {
             self.errorView.view.isHidden = true
-            self.homeTableView?.reloadData()
+            self.homeCollectionView?.reloadData()
         }
     }
     
@@ -88,37 +88,14 @@ class HomeViewController: UIViewController {
     
 }
 
-extension HomeViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let headerView = view as? UITableViewHeaderFooterView
-        headerView?.textLabel?.text = viewModel.items[section].sectionTitle//sectionText(section)
-        headerView?.textLabel?.textColor = .black
-        headerView?.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 || indexPath.section == 2) {
-            return 150
-        }
-        return 225
-    }
-    
-    func tableView(_ tableView: UITableView,
-                                willDisplay cell: UITableViewCell,
-                            forRowAt indexPath: IndexPath) {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+            
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.setTemplateWithSubviews(isLoading, animate: true, viewBackgroundColor: .systemBackground)
     }
     
-}
-
-extension HomeViewController: CellActionDelegate {
-    
-    func handleTap(_ content: String) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let content = viewModel.items[indexPath.section].getContent(indexPath.row)
         let alert = UIAlertController(title: "Alert", message: content, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)

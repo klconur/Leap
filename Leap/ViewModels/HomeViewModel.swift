@@ -20,16 +20,14 @@ protocol HomeViewModelItem {
     var sectionTitle: String { get }
     var rowCount: Int { get }
     func bindData(data: Data)
-}
-
-protocol CellActionDelegate {
-    func handleTap(_ content: String)
+    func getLayoutSection() -> NSCollectionLayoutSection
+    func getCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell
+    func getContent(_ index: Int) -> String
 }
 
 class HomeViewModel : NSObject {
     
     var items = [HomeViewModelItem]()
-    var delegate: CellActionDelegate?
     
     override init() {
         super.init()
@@ -46,79 +44,34 @@ class HomeViewModel : NSObject {
     
 }
 
-extension HomeViewModel: UITableViewDataSource {
+extension HomeViewModel: UICollectionViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.identifier, for: indexPath) as! SectionHeader
+             sectionHeader.label.text = items[indexPath.section].sectionTitle
+             return sectionHeader
+        } else {
+             return UICollectionReusableView()
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return items.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items[section].rowCount
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = items[indexPath.section]
-        switch item.type {
-        case .starting:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: CardViewCell.identifier, for: indexPath) as? CardViewCell {
-                cell.clockIcon.isHidden = false
-                if let item = items[indexPath.section] as? HomeViewModelStartingItem, let data = item.item {
-                    cell.cardTitle.text = data.title
-                    cell.subtitleLabel.text = data.subtitle
-                    cell.cardImage.sd_setImage(with: URL(string: data.image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
-                    cell.addTapGesture {
-                        self.handleTap(item.content()!)
-                    }
-                }
-                return cell
-            }
-        case .yourUpcomings:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: HorizontalCardViewCell.identifier, for: indexPath) as? HorizontalCardViewCell {
-                cell.setIconHidden(false)
-                if let item = items[indexPath.section] as? HomeViewModelYourUpcomingItem, let data = item.items {
-                    cell.setItems(data)
-                    cell.delegate = self
-                }
-                return cell
-            }
-        case .upcomings:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: HorizontalCardViewCell.identifier, for: indexPath) as? HorizontalCardViewCell {
-                cell.setIconHidden(true)
-                if let item = items[indexPath.section] as? HomeViewModelUpcomingItem, let data = item.items {
-                    cell.setItems(data)
-                    cell.delegate = self
-                }
-                return cell
-            }
-        case .explore:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: CardViewCell.identifier, for: indexPath) as? CardViewCell {
-                cell.clockIcon.isHidden = true
-                if let item = items[indexPath.section] as? HomeViewModelExploreItem, let data = item.items {
-                    cell.cardTitle.text = data[indexPath.row].title
-                    cell.subtitleLabel.text = data[indexPath.row].subtitle
-                    cell.cardImage.sd_setImage(with: URL(string: data[indexPath.row].image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
-                    cell.addTapGesture {
-                        self.handleTap(item.content(indexPath.row)!)
-                    }
-                }
-                return cell
-            }
-        }
-        return UITableViewCell()
-    }
-
-}
-
-extension HomeViewModel: CellActionDelegate {
-    
-    func handleTap(_ content: String) {
-        if let delegate = delegate {
-            delegate.handleTap(content)
-        }
+        return item.getCell(collectionView, indexPath: indexPath)
     }
 }
 
 class HomeViewModelStartingItem: HomeViewModelItem {
+    
     var item: Starting?
     
     var type: HomeViewModelItemType {
@@ -143,6 +96,45 @@ class HomeViewModelStartingItem: HomeViewModelItem {
     func bindData(data: Data) {
         item = data.starting
     }
+    
+    func getLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                             heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(230))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                         subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
+        let section = NSCollectionLayoutSection(group: group)
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top)
+    
+        section.boundarySupplementaryItems = [header]
+        return section
+    }
+    
+    func getCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardViewCell.cardIdentifier, for: indexPath) as! CardViewCell
+        cell.icon.isHidden = false
+        if let item = item {
+            cell.cardTitle.text = item.title
+            cell.subtitleLabel.text = item.subtitle
+            cell.cardImage.sd_setImage(with: URL(string: item.image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+        }
+        return cell
+    }
+    
+    func getContent(_ index: Int) -> String {
+        if let item = item {
+            return item.title ?? ""
+        }
+        return ""
+    }
 }
 
 class HomeViewModelYourUpcomingItem: HomeViewModelItem {
@@ -157,7 +149,10 @@ class HomeViewModelYourUpcomingItem: HomeViewModelItem {
     }
     
     var rowCount: Int {
-        return 1
+        if let items = items {
+            return items.count
+        }
+        return 3
     }
     
     func content(_ row: Int) -> String? {
@@ -169,6 +164,50 @@ class HomeViewModelYourUpcomingItem: HomeViewModelItem {
     
     func bindData(data: Data) {
         items = data.your_upcomings
+    }
+    
+    func getLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension:
+        .fractionalHeight(1))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets.top = 5
+        item.contentInsets.bottom = 15
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
+        heightDimension: .fractionalWidth(0.35))
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 8, bottom: 10, trailing: 8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top)
+        section.boundarySupplementaryItems = [header]
+        return section
+    }
+    
+    func getCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallCardViewCell.smallCardIdentifier, for: indexPath) as! SmallCardViewCell
+        cell.icon.isHidden = false
+        if let items = items {
+            cell.cardTitle.text = items[indexPath.row].title
+            //cell.subtitleLabel.text = items[index].subtitle
+            cell.cardImage.sd_setImage(with: URL(string: items[indexPath.row].image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+        }
+        return cell
+    }
+    
+    func getContent(_ index: Int) -> String {
+        if let items = items {
+            return items[index].title ?? ""
+        }
+        return ""
     }
 }
 
@@ -184,7 +223,10 @@ class HomeViewModelUpcomingItem: HomeViewModelItem {
     }
     
     var rowCount: Int {
-        return 1
+        if let items = items {
+            return items.count
+        }
+        return 3
     }
     
     func content(_ row: Int) -> String? {
@@ -196,6 +238,49 @@ class HomeViewModelUpcomingItem: HomeViewModelItem {
     
     func bindData(data: Data) {
         items = data.upcomings
+    }
+    
+    func getLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension:
+        .fractionalHeight(1))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets.top = 5
+        item.contentInsets.bottom = 15
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
+        heightDimension: .fractionalWidth(0.35))
+
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top)
+        section.boundarySupplementaryItems = [header]
+        return section
+    }
+    
+    func getCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallCardViewCell.smallCardIdentifier, for: indexPath) as! SmallCardViewCell
+        cell.icon.isHidden = true
+        if let items = items {
+            cell.cardTitle.text = items[indexPath.row].title
+            cell.cardImage.sd_setImage(with: URL(string: items[indexPath.row].image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+        }
+        return cell
+    }
+    
+    func getContent(_ index: Int) -> String {
+        if let items = items {
+            return items[index].title ?? ""
+        }
+        return ""
     }
 }
 
@@ -226,6 +311,44 @@ class HomeViewModelExploreItem: HomeViewModelItem {
     
     func bindData(data: Data) {
         items = data.explore
+    }
+    
+    func getLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                             heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(240))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                         subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top)
+        section.boundarySupplementaryItems = [header]
+        return section
+    }
+    
+    func getCell(_ collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardViewCell.cardIdentifier, for: indexPath) as! CardViewCell
+        cell.icon.isHidden = true
+        if let items = items {
+            cell.cardTitle.text = items[indexPath.row].title
+            cell.subtitleLabel.text = items[indexPath.row].subtitle
+            cell.cardImage.sd_setImage(with: URL(string: items[indexPath.row].image ?? ""), placeholderImage: UIImage(named: "Placeholder"))
+        }
+        return cell
+    }
+    
+    func getContent(_ index: Int) -> String {
+        if let items = items {
+            return items[index].title ?? ""
+        }
+        return ""
     }
 }
 

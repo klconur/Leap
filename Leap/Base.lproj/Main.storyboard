@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,27 +32,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="H4c-ym-P7P">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3fx-85-dpU">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aXi-Ss-Bok">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
                                 <connections>
-                                    <outlet property="delegate" destination="HE8-2v-ARx" id="3as-7L-tTI"/>
+                                    <outlet property="delegate" destination="HE8-2v-ARx" id="Oiq-3f-9ZR"/>
                                 </connections>
-                            </tableView>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ALH-V4-vMn"/>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="H4c-ym-P7P" firstAttribute="centerX" secondItem="7Tt-yi-QhY" secondAttribute="centerX" id="CT0-8m-xcW"/>
-                            <constraint firstItem="H4c-ym-P7P" firstAttribute="top" secondItem="ALH-V4-vMn" secondAttribute="top" id="O0A-of-WbT"/>
-                            <constraint firstItem="H4c-ym-P7P" firstAttribute="leading" secondItem="ALH-V4-vMn" secondAttribute="leading" id="PtJ-Ux-jqc"/>
-                            <constraint firstItem="H4c-ym-P7P" firstAttribute="bottom" secondItem="ALH-V4-vMn" secondAttribute="bottom" id="bJG-KN-IH5"/>
+                            <constraint firstItem="3fx-85-dpU" firstAttribute="top" secondItem="ALH-V4-vMn" secondAttribute="top" id="7jr-Ew-Gwt"/>
+                            <constraint firstItem="3fx-85-dpU" firstAttribute="leading" secondItem="ALH-V4-vMn" secondAttribute="leading" id="EqB-8J-PAh"/>
+                            <constraint firstItem="3fx-85-dpU" firstAttribute="bottom" secondItem="ALH-V4-vMn" secondAttribute="bottom" id="Itc-9t-Y3M"/>
+                            <constraint firstItem="3fx-85-dpU" firstAttribute="centerX" secondItem="7Tt-yi-QhY" secondAttribute="centerX" id="nqE-AB-MC8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="MFm-GP-1Fy"/>
                     <connections>
-                        <outlet property="homeTableView" destination="H4c-ym-P7P" id="oO9-wp-YS1"/>
+                        <outlet property="homeCollectionView" destination="3fx-85-dpU" id="4dg-6A-fNW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGz-oU-vJ0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -128,5 +135,8 @@
         <image name="Empty" width="0.3333333432674408" height="0.3333333432674408"/>
         <image name="Home" width="20" height="17"/>
         <image name="TabbarBg" width="48" height="48"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
